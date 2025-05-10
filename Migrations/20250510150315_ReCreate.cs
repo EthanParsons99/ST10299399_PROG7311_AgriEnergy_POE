@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ReCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,11 +32,29 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     FarmerId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FarmerName = table.Column<string>(type: "TEXT", nullable: false),
+                    FarmerSurname = table.Column<string>(type: "TEXT", nullable: false),
+                    FarmerPhone = table.Column<string>(type: "TEXT", nullable: false),
+                    FarmerEmail = table.Column<string>(type: "TEXT", nullable: false),
                     FarmerPassword = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Farmers", x => x.FarmerId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    UserPassword = table.Column<string>(type: "TEXT", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,8 +64,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductName = table.Column<string>(type: "TEXT", nullable: false),
-                    ProductDescription = table.Column<string>(type: "TEXT", nullable: false),
                     ProductPrice = table.Column<double>(type: "REAL", nullable: false),
+                    ProductDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     FarmerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -74,6 +93,9 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Farmers");

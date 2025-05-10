@@ -14,6 +14,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -29,14 +31,45 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=Login}/{id?}");
+
+            // Seed the database with initial data
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                // Check if the database is empty
+                context.Database.EnsureCreated();
+                Console.WriteLine("Checking for seeding users");
+                if (!context.Users.Any())
+                {
+                    context.Users.AddRange
+                    (
+                        new User
+                        {
+                            UserName = "admin",
+                            UserPassword = "admin123",
+                            Role = "Employee"
+                        },
+                        new User
+                        {
+                            UserName = "farmer",
+                            UserPassword = "farmer123",
+                            Role = "Farmer"
+                        }
+                    );
+                    context.SaveChanges();
+                }
+            }
 
             app.Run();
+
+            
         }
     }
 }

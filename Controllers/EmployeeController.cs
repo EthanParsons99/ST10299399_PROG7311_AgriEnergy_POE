@@ -5,6 +5,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
     public class EmployeeController : Controller
     {
+
         private readonly ApplicationDbContext _context;
         
         public EmployeeController(ApplicationDbContext context)
@@ -14,13 +15,21 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
         public IActionResult AddFarmer()
         {
-            return View();
+            if (HttpContext.Session.GetString("Role") != "Employee")
+            {
+                return RedirectToAction("Login", "User");
+            }
+            return View("AddFarmer", "Employee");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFarmer(Farmer farmer)
         {
+            if (HttpContext.Session.GetString("Role") != "Employee")
+            {
+                return RedirectToAction("Login", "User");
+            }
             if (ModelState.IsValid)
             {
                 _context.Farmers.Add(farmer);

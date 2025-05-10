@@ -12,6 +12,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<User> Users { get; set; }
   
     }
     

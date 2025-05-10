@@ -93,6 +93,29 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("ST10299399_PROG7311_GreenEnergy_POE.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserPassword")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("ST10299399_PROG7311_GreenEnergy_POE.Models.Product", b =>
                 {
                     b.HasOne("ST10299399_PROG7311_GreenEnergy_POE.Models.Farmer", "Farmer")
