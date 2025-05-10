@@ -1,3 +1,6 @@
+using ST10299399_PROG7311_GreenEnergy_POE.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace ST10299399_PROG7311_GreenEnergy_POE
 {
     public class Program
@@ -5,6 +8,9 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
