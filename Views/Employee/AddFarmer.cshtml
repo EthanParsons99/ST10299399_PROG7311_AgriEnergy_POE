@@ -1,0 +1,20 @@
+﻿@model ST10299399_PROG7311_GreenEnergy_POE.Farmer
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<h1>Add Farmer</h1>
+
+<form asp-action="AddFarmer" method="post">
+    <div class="form-group">
+        <label for="FarmerName">Farmer Name</label>
+        <input type="text" class="form-control" id="FarmerName" name="FarmerName" required />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" required />
+    </div> 
+    
+    <button type="submit" class="btn btn-primary">Add Farmer</button>
+</form>
