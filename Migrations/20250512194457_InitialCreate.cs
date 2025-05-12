@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
 {
     /// <inheritdoc />
-    public partial class ReCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,27 +43,13 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: false),
-                    UserPassword = table.Column<string>(type: "TEXT", nullable: false),
-                    Role = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductName = table.Column<string>(type: "TEXT", nullable: false),
+                    ProductCategory = table.Column<string>(type: "TEXT", nullable: false),
                     ProductPrice = table.Column<double>(type: "REAL", nullable: false),
                     ProductDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     FarmerId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -79,6 +65,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "EmployeeName", "EmployeePassword" },
+                values: new object[] { 1, "Admin", "admin123" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_FarmerId",
                 table: "Products",
@@ -93,9 +84,6 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Farmers");

@@ -1,0 +1,48 @@
+﻿@{ViewData
+["Title"] = "Emplyee Dashboard";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h2>Employee Dashboard</h2>
+                </div>
+                <div class="card-body">
+                    <p>Welcome to the green energy dashboard</p>
+                
+
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Manage Farmers
+                                    </h5>
+                                    <p class="card-text">View, add, and manage farmer accounts.</p>
+                                    <a asp-action="AddFarmer" class="btn btn-outline-success">Add New Farmer</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        View Products
+                                    </h5>
+                                    <p class="card-text">Browse all listed products</p>
+                                    <a asp-action="ViewProducts" class="btn btn-outline-success">View</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -10,8 +10,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -49,7 +48,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=User}/{action=Login}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             // Seed the database with initial data
             using (var scope = app.Services.CreateScope())

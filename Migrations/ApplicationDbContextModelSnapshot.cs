@@ -34,6 +34,14 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            EmployeeName = "Admin",
+                            EmployeePassword = "admin123"
+                        });
                 });
 
             modelBuilder.Entity("ST10299399_PROG7311_GreenEnergy_POE.Models.Farmer", b =>
@@ -76,6 +84,10 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     b.Property<int>("FarmerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ProductCategory")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("ProductDate")
                         .HasColumnType("TEXT");
 
@@ -91,29 +103,6 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
                     b.HasIndex("FarmerId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("ST10299399_PROG7311_GreenEnergy_POE.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ST10299399_PROG7311_GreenEnergy_POE.Models.Product", b =>
