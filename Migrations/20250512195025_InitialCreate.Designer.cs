@@ -11,7 +11,7 @@ using ST10299399_PROG7311_GreenEnergy_POE.Models;
 namespace ST10299399_PROG7311_GreenEnergy_POE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250512194457_InitialCreate")]
+    [Migration("20250512195025_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

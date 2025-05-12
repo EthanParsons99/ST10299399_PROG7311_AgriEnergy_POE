@@ -32,7 +32,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                 else if (User.IsInRole("Farmer"))
                 {
                     var farmerId = User.FindFirst("FarmerId")?.Value;
-                    return RedirectToAction("ViewMyProducts", "Farmer", new { FarmerId = farmerId });
+                    return RedirectToAction("Index", "Farmer", new { FarmerId = farmerId });
                 }
             }
             return View();
