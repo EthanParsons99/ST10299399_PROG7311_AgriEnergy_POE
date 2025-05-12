@@ -4,23 +4,77 @@
     ViewData["Title"] = "Add Product";
 }
 
-<h1>Add Product</h1>
-
-<form asp-action="AddProduct" method="post">
-    <div class="form-group">
-        <label for="ProductName">Product Name</label>
-        <input type="text" class="form-control" id="ProductName" name="ProductName" required/>
-    </div>
-
-    <div class="form-group">
-        <label for="ProductPrice">Price</label>
-        <input type="number" class="form-control" id="ProductPrice" name="ProductPrice" required/>  
-    </div>
-
-    <div class="form-group">
-        <label for="ProductDate">Date</label>
-        <input type="date" class="form-control" id="ProductDate" name="ProductDate" required/>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Add Product</button>
-</form>
+<div class="container">
+    <h2>Add New Product</h2>
+    
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+    
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    
+    <form asp-action="AddProduct" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductName" class="form-label">Product Name</label>
+                    <input asp-for="ProductName" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductCategory" class="form-label">Category</label>
+                    <input asp-for="ProductCategory" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductPrice" class="form-label">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input asp-for="ProductPrice" type="number" step="0.01" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductDate" class="form-label">Date</label>
+                    <input asp-for="ProductDate" type="date" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group mb-3">
+            <label asp-for="FarmerId" class="form-label">Farmer</label>
+            <select asp-for="FarmerId" class="form-select" required>
+                <option value="">Select Farmer</option>
+                @foreach (var farmer in ViewBag.Farmers)
+                {
+                    <option value="@farmer.FarmerId">@farmer.FullName</option>
+                }
+            </select>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Add Product</button>
+            <a asp-action="ViewMyProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value" class="btn btn-outline-secondary">Back to My Products</a>
+        </div>
+    </form>
+</div>
