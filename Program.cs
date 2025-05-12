@@ -1,5 +1,6 @@
 using ST10299399_PROG7311_GreenEnergy_POE.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE
 {
@@ -15,7 +16,19 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddSession();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout to 30 minutes
+                options.Cookie.HttpOnly = true; // Make the session cookie HTTP-only
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Auth/Login"; // Redirect to login page if not authenticated
+                    options.AccessDeniedPath = "/Auth/Login";
+                });
 
             var app = builder.Build();
 
@@ -46,23 +59,27 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
                 // Check if the database is empty
                 context.Database.EnsureCreated();
                 Console.WriteLine("Checking for seeding users");
-                if (!context.Users.Any())
+                if (!context.Employees.Any())
                 {
-                    context.Users.AddRange
-                    (
-                        new User
-                        {
-                            UserName = "admin",
-                            UserPassword = "admin123",
-                            Role = "Employee"
-                        },
-                        new User
-                        {
-                            UserName = "farmer",
-                            UserPassword = "farmer123",
-                            Role = "Farmer"
-                        }
-                    );
+                    context.Employees.Add(new Employee
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Admin",
+                        EmployeePassword = "admin123"
+                    });
+                    context.SaveChanges();
+                }
+
+                if (!context.Farmers.Any())
+                {
+                    context.Farmers.Add(new Farmer
+                    {
+                        FarmerName = "John",
+                        FarmerSurname = "Doe",
+                        FarmerPhone = "1234567890",
+                        FarmerEmail = "1234567890",
+                        FarmerPassword = "password123"
+                    });
                     context.SaveChanges();
                 }
             }

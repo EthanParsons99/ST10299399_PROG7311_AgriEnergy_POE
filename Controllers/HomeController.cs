@@ -28,5 +28,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public class ErrorViewModel
+        {
+            public string RequestId { get; set; }
+            public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        }
     }
 }
