@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
 
@@ -15,6 +18,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         public EmployeeController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            return RedirectToAction("ViewProducts");
         }
 
         public IActionResult AddFarmer()
@@ -71,6 +79,10 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                 .Select(p => p.ProductCategory)
                 .Distinct()
                 .ToList();
+
+            ViewBag.CurrentCategory = searchCategory;
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
 
             return View(products);
         }

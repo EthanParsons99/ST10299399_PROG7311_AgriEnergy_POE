@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
+    [Authorize(Roles = "Farmer")]
     public class FarmerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,15 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            var farmerId = User.FindFirst("FarmerId")?.Value;
+            if (farmerId != null)
+            {
+                return RedirectToAction("ViewMyProducts", new { farmerId = int.Parse(farmerId) } );
+            }
+            return RedirectToAction("Login", "Auth");
+        }
 
 
         public IActionResult AddProduct()
@@ -23,6 +34,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             ViewBag.Farmers = _context.Farmers
                 .Select(f => new { f.FarmerId, FullName =  $"{f.FarmerName} {f.FarmerSurname}"}).ToList();
             
+            string currentFarmerId = User.FindFirst("FarmerId")?.Value;
+            if(!string.IsNullOrEmpty(currentFarmerId))
+            {
+                ViewBag.CurrentFarmerId = int.Parse(currentFarmerId);
+            }
             return View();
         }
 
@@ -34,17 +50,22 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             {
                 try
                 {
-                    var farmerexsists = await _context.Farmers.AnyAsync(f => f.FarmerId == product.FarmerId);
-                    if (!farmerexsists)
+                    if(product.ProductDate == DateTime.MinValue)
+                    {
+                        product.ProductDate = DateTime.Now;
+                    }
+
+                    var farmerExists = await _context.Farmers
+                        .AnyAsync(f => f.FarmerId == product.FarmerId);
+                    if (!farmerExists)
                     {
                         ModelState.AddModelError("", "Farmer does not exist.");
                         return View(product);
                     }
-
                     _context.Products.Add(product);
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Product added successfully!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ViewMyProducts", new { farmerId = product.FarmerId });
                 }
                 catch (DbUpdateException ex)
                 {
@@ -68,8 +89,14 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                 return NotFound();
             }
 
+            string currentFarmerId = User.FindFirst("FarmerId")?.Value;
+            if (!string.IsNullOrEmpty(currentFarmerId) && currentFarmerId != farmerId.ToString())
+            {
+                return Forbid();
+            }
+
             ViewBag.FarmerName = $"{farmer.FarmerName} {farmer.FarmerSurname}";
-            return View(farmer.Products.ToList());
+            return View(farmer.Products.OrderByDescending(p => p.ProductDate).ToList());
         }
     }
 }

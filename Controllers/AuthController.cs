@@ -14,20 +14,34 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
     public class AuthController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            { 
+                if (User.IsInRole("Employee"))
+                {
+                    return RedirectToAction("ViewProducts", "Employee");
+                }
+                else if (User.IsInRole("Farmer"))
+                {
+                    var farmerId = User.FindFirst("FarmerId")?.Value;
+                    return RedirectToAction("ViewMyProducts", "Farmer", new { FarmerId = farmerId });
+                }
+            }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async IActionResult Login(string username, string password, string userRole)
+        public async Task<IActionResult> Login(string username, string password, string userRole)
         {
             if (userRole == "Employee")
             {
