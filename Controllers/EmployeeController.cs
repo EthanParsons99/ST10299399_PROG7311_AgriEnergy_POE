@@ -1,5 +1,9 @@
-﻿using ST10299399_PROG7311_GreenEnergy_POE.Models;   
+﻿using ST10299399_PROG7311_GreenEnergy_POE.Models; 
+using ST10299399_PROG7311_GreenEnergy_POE.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
@@ -15,29 +19,60 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
         public IActionResult AddFarmer()
         {
-            if (HttpContext.Session.GetString("Role") != "Employee")
-            {
-                return RedirectToAction("Login", "User");
-            }
-            return View("AddFarmer", "Employee");
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFarmer(Farmer farmer)
         {
-            if (HttpContext.Session.GetString("Role") != "Employee")
-            {
-                return RedirectToAction("Login", "User");
-            }
             if (ModelState.IsValid)
             {
-                _context.Farmers.Add(farmer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                try 
+                {
+                    _context.Farmers.Add(farmer);
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Farmer added successfully!";
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException ex)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " + ex.Message);
+                }
+            }
+            return View(farmer);
+        }
+
+        public async Task<IActionResult> ViewProducts(string searchCategory = null,
+            DateTime? startDate = null, DateTime? endDate = null)
+        {
+            var productsQuery = _context.Products
+                .Include(p => p.Farmer)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchCategory))
+            {
+                productsQuery = productsQuery.Where(p => p.ProductCategory.ToLower().Contains(searchCategory.ToLower()));
             }
 
-            return View(farmer);
+            if (startDate.HasValue)
+            {
+                productsQuery = productsQuery.Where(p => p.ProductDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                productsQuery = productsQuery.Where(p => p.ProductDate <= endDate.Value);
+            }
+
+            var products = await productsQuery.OrderByDescending(p => p.ProductDate).ToListAsync();
+
+            ViewBag.Categories = _context.Products
+                .Select(p => p.ProductCategory)
+                .Distinct()
+                .ToList();
+
+            return View(products);
         }
     }
 }
