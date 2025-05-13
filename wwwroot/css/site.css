@@ -21,14 +21,6 @@ body {
   margin-bottom: 60px;
 }
 
-.footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  height: 60px;
-}
-
 .card{
     transition: all 0.3 ease;
 }
@@ -50,4 +42,8 @@ body {
     white-space: nowrap;
     height: 60px;
     background-color: #f8f9fa;
+}
+
+.white-text{
+    color: white;
 }
