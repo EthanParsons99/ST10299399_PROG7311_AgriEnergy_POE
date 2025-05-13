@@ -3,8 +3,14 @@
     ViewData["Title"] = "My Products";
 }
 
+<body style="background-image: url('/images/vyeboomgb5.jpg');
+             background-size:cover;
+             background-repeat: no-repeat;
+             background-position: center;">
+</body>
+
 <div class="container">
-    <h2>My Products - @ViewBag.FarmerName</h2>
+    <h2 class="white-text">My Products - @ViewBag.FarmerName</h2>
 
     <div class="mb-3">
         <a asp-action="AddProduct" class="btn btn-success">Add New Product</a>
@@ -18,28 +24,20 @@
     }
     else
     {
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="table-success">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in Model)
-                    {
-                        <tr>
-                            <td>@product.ProductName</td>
-                            <td>@product.ProductCategory</td>
-                            <td>R @product.ProductPrice.ToString("N2")</td>
-                            <td>@product.ProductDate.ToShortDateString()</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div class="row mt-5">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Category:</strong> @product.ProductCategory</p>
+                            <p class="card-text"><strong>Price:</strong> R @product.ProductPrice.ToString("N2")</p>
+                            <p class="card-text"><strong>Date:</strong> @product.ProductDate.ToShortDateString()</p>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     }
 </div>
