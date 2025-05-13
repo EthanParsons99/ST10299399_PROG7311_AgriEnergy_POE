@@ -27,11 +27,11 @@
                                     <a class="nav-link text-dark" asp-controller="Employee" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Employee" asp-action="ViewProducts">View Products</a>
+                                    <a class="nav-link text-dark" asp-controller="Employee" asp-action="ViewProducts">View Products</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Employee" asp-action="AddFarmer">Add Farmer</a>
+                                    <a class="nav-link text-dark" asp-controller="Employee" asp-action="AddFarmer">Add Farmer</a>
                                 </li>
                             }
                             
@@ -42,14 +42,14 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Farmer" asp-action="ViewMyProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value">View Products</a>
+                                    <a class="nav-link text-dark" asp-controller="Farmer" asp-action="ViewMyProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value">View Products</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Farmer" asp-action="AddProduct">Add Product</a>
+                                    <a class="nav-link text-dark" asp-controller="Farmer" asp-action="AddProduct">Add Product</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Farmer" asp-action="Marketplace">Marketplace</a>
+                                    <a class="nav-link text-dark" asp-controller="Farmer" asp-action="Marketplace">Marketplace</a>
                                 </li>
                             }
                         }
