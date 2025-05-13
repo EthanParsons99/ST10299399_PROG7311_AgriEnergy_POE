@@ -38,7 +38,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
                 { 
                     EmployeeId = 1, 
                     EmployeeName = "Admin", 
-                    EmployeePassword = "admin123" 
+                    EmployeePassword = "admin123",
+                    EmployeeEmail = "admin@gmail.com"
                 }
 
             );

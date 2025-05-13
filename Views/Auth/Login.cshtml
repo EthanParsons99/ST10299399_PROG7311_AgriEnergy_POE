@@ -10,7 +10,7 @@
     <div class="col-md-6">
         <div class="card shadow-sm">
             <div class="card-header bg-success text-white">
-                <h2 class="text-center">GreenEnergy lOGIN</h2>
+                <h2 class="text-center">Agri-Connect Energy Login</h2>
             </div>
             <div class="card-body">
                 @if(!ViewData.ModelState.IsValid)
@@ -27,8 +27,8 @@
                 <form asp-action="Login" method="post">
                     @Html.AntiForgeryToken()
                     <div class="form-group mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type"text" class="form-control" id="username" name="username" required>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div form-group class="mb-3">
                        <label for="password" class="form-label"></label>Password</label>
@@ -46,10 +46,6 @@
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
-
-            </div>
-            <div class="card-footer text-center">
-                <p>Don't have an account? <a asp-controller="Auth" asp-action="Register">Register here</a></p>
             </div>
         </div>
     </div>

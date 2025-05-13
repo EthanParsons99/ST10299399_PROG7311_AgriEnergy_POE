@@ -39,18 +39,19 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string username, string password, string userRole)
+        public async Task<IActionResult> Login(string email, string password, string userRole)
         {
             if (userRole == "Employee")
             {
                 var employee = await _context.Employees
-                    .FirstOrDefaultAsync(e => e.EmployeeName == username);
+                    .FirstOrDefaultAsync(e => e.EmployeeEmail == email);
 
                 if (employee != null && employee.EmployeePassword == password)
                 {
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, employee.EmployeeName),
+                        new Claim(ClaimTypes.Email, employee.EmployeeEmail),
                         new Claim(ClaimTypes.Role, "Employee"),
                         new Claim("EmployeeId", employee.EmployeeId.ToString())
                     };
@@ -65,13 +66,14 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             else if (userRole == "Farmer")
             {
                 var farmer = await _context.Farmers
-                    .FirstOrDefaultAsync(f => f.FarmerName == username);
+                    .FirstOrDefaultAsync(f => f.FarmerEmail == email);
 
                 if (farmer != null && farmer.FarmerPassword == password)
                 {
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, farmer.FarmerName),
+                        new Claim(ClaimTypes.Email, farmer.FarmerEmail),
                         new Claim(ClaimTypes.Role, "Farmer"),
                         new Claim("FarmerId", farmer.FarmerId.ToString())
                     };

@@ -21,14 +21,14 @@ body {
   margin-bottom: 60px;
 }
 
-.card{
+/*.card{
     transition: all 0.3 ease;
 }
 
 .card:hover{
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
-}
+}*/
 
 .table-success{
         background-color: #d1e7dd;
