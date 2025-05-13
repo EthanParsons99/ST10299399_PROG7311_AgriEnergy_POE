@@ -12,17 +12,12 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 
         public string DbPath { get; private set; }
 
-        public ApplicationDbContext()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "GreenEnergy.db");
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite($"Data Source={DbPath}");
-        }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -10,7 +10,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<ApplicationDbContext>();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite("Data Source=GreenEnergy.db"));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
