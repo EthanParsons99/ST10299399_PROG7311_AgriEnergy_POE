@@ -38,7 +38,7 @@
                             @if(User.IsInRole("Farmer"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Farmer" asp-action="ViewProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value">View Products</a>
+                                    <a class="nav-link" asp-controller="Farmer" asp-action="ViewMyProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value">View Products</a>
                                 </li>
 
                                 <li class="nav-item">

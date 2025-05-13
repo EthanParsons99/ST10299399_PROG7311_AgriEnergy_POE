@@ -77,7 +77,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> ViewMyProducst(int farmerId)
+        public async Task<IActionResult> ViewMyProducts(int farmerId)
         {
             var farmer = await _context.Farmers
                 .Include(f => f.Products)
