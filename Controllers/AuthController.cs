@@ -27,12 +27,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             { 
                 if (User.IsInRole("Employee"))
                 {
-                    return RedirectToAction("ViewProducts", "Employee");
+                    return RedirectToAction("Index", "Employee");
                 }
                 else if (User.IsInRole("Farmer"))
                 {
-                    var farmerId = User.FindFirst("FarmerId")?.Value;
-                    return RedirectToAction("Index", "Farmer", new { FarmerId = farmerId });
+                    return RedirectToAction("Index", "Farmer");
                 }
             }
             return View();
@@ -60,7 +59,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                     
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToAction("ViewProducts", "Employee");
+                    return RedirectToAction("Index", "Employee");
                 }
             }
             else if (userRole == "Farmer")
@@ -81,7 +80,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                     
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToAction("ViewMyProducts", "Farmer", new {FarmerId = farmer.FarmerId});
+                    return RedirectToAction("Index", "Farmer", new {FarmerId = farmer.FarmerId});
                 }
             }
             ModelState.AddModelError("", "Invalid login attempt.");
@@ -91,7 +90,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

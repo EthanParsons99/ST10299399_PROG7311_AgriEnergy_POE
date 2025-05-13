@@ -21,11 +21,18 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         public IActionResult Index()
         {
             var farmerId = User.FindFirst("FarmerId")?.Value;
-            if (farmerId != null)
+            if (farmerId == null)
             {
-                return RedirectToAction("ViewMyProducts", new { farmerId = int.Parse(farmerId) } );
+                return RedirectToAction("Login", "Auth");
             }
-            return RedirectToAction("Login", "Auth");
+
+            int id = int.Parse(farmerId);
+            var farmer = _context.Farmers
+                .Include(f => f.Products)
+                .FirstOrDefault(f => f.FarmerId == id);
+
+            return View(farmer);
+            
         }
 
 

@@ -21,7 +21,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("ViewProducts");
+            return View();
         }
 
         public IActionResult AddFarmer()

@@ -19,15 +19,15 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
                         @if(User.Identity.IsAuthenticated)
                         {
                            if(User.IsInRole("Employee"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Employee" asp-action="ViewProducts">View Products</a>"
+                                    <a class="nav-link text-dark" asp-controller="Employee" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Employee" asp-action="ViewProducts">View Products</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -37,6 +37,10 @@
                             
                             @if(User.IsInRole("Farmer"))
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Farmer" asp-action="Index">Home</a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" asp-controller="Farmer" asp-action="ViewMyProducts" asp-route-farmerId="@User.FindFirst("FarmerId")?.Value">View Products</a>
                                 </li>
@@ -48,6 +52,12 @@
                                     <a class="nav-link" asp-controller="Farmer" asp-action="Marketplace">Marketplace</a>
                                 </li>
                             }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
                         }
                     </ul>
                     <ul class=navbar-nav>
