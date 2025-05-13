@@ -29,22 +29,34 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
 
         public IActionResult AddProduct()
-        {
-            ViewBag.Farmers = _context.Farmers
-                .Select(f => new { f.FarmerId, FullName =  $"{f.FarmerName} {f.FarmerSurname}"}).ToList();
-            
+        { 
             string currentFarmerId = User.FindFirst("FarmerId")?.Value;
-            if(!string.IsNullOrEmpty(currentFarmerId))
+            if(string.IsNullOrEmpty(currentFarmerId))
             {
-                ViewBag.CurrentFarmerId = int.Parse(currentFarmerId);
+               return RedirectToAction("Login", "Auth"); 
             }
-            return View();
+
+            var product = new Product
+            {
+                FarmerId = int.Parse(currentFarmerId),
+                ProductDate = DateTime.Now
+            };
+
+            return View(product);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(Product product)
         {
+            Console.WriteLine($"Recieved Data: {product.ProductName}, {product.ProductCategory}, {product.ProductPrice}, {product.ProductDate}, {product.FarmerId }");
+            
+            string currentFarmerId = User.FindFirst("FarmerId")?.Value;
+            if (!string.IsNullOrEmpty(currentFarmerId))
+            {
+               product.FarmerId = int.Parse(currentFarmerId);
+            }
+
             if(ModelState.IsValid)
             {
                 try
@@ -54,13 +66,6 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                         product.ProductDate = DateTime.Now;
                     }
 
-                    var farmerExists = await _context.Farmers
-                        .AnyAsync(f => f.FarmerId == product.FarmerId);
-                    if (!farmerExists)
-                    {
-                        ModelState.AddModelError("", "Farmer does not exist.");
-                        return View(product);
-                    }
                     _context.Products.Add(product);
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Product added successfully!";
@@ -71,9 +76,6 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
                     ModelState.AddModelError("", "Unable to save changes. " + ex.Message);
                 }
             }
-
-            ViewBag.Farmers = _context.Farmers
-                .Select(f => new { f.FarmerId, FullName = $"{f.FarmerName} {f.FarmerSurname}" }).ToList();
             return View(product);
         }
 
