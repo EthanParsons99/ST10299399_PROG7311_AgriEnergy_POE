@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
@@ -16,6 +17,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
         public DateTime ProductDate { get; set; }
 
         public int FarmerId { get; set; }
+
+        [BindNever]
         public Farmer Farmer { get; set; }
     }
 }

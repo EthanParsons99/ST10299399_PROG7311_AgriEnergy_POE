@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
@@ -45,23 +46,25 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             return View(product);
         }
 
+        // Modified FarmerController with enhanced error tracking
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(Product product)
         {
-            Console.WriteLine($"Recieved Data: {product.ProductName}, {product.ProductCategory}, {product.ProductPrice}, {product.ProductDate}, {product.FarmerId }");
-            
+            Console.WriteLine($"Recieved Data: {product.ProductName}, {product.ProductCategory}, {product.ProductPrice}, {product.ProductDate}, {product.FarmerId}");
+
             string currentFarmerId = User.FindFirst("FarmerId")?.Value;
             if (!string.IsNullOrEmpty(currentFarmerId))
             {
-               product.FarmerId = int.Parse(currentFarmerId);
+                product.FarmerId = int.Parse(currentFarmerId);
             }
 
-            if(ModelState.IsValid)
+            ModelState.Remove("Farmer");
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    if(product.ProductDate == DateTime.MinValue)
+                    if (product.ProductDate == DateTime.MinValue)
                     {
                         product.ProductDate = DateTime.Now;
                     }
