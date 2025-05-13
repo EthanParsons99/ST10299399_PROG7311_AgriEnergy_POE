@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<body style="background-image: url('/images/agribg.jpeg');
+             background-size:cover;
+             background-repeat: no-repeat;
+             background-position: center;">
+</body>
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Agri-Energy Connect Platform</h1>
@@ -12,8 +17,8 @@
          <div class="card shadow-sm h-100">
              <div class="card-body">
                  <h5 class="card-title">Farmers</h5>
-                    <p class="card-text">Farmers can register, manage their profiles, and add products.</p>
-                    <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success">Login as Farmer</a>
+                    <p class="card-text">As a Farmer you are able to browse the marketplace and add your own products.</p>
+                    <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success">Login as a Farmer</a>
              </div>
          </div>
     </div>
@@ -22,8 +27,8 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h5 class="card-title">Employees</h5>
-                <p class="card-text">Emplyees can manage farmer accounts and oversee products</p>
-                <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success">Login as Employee</a>
+                <p class="card-text">Employees are able to add new farmers and filter products.</p>
+                <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success">Login as an Employee</a>
             </div>
         </div>
     </div>
@@ -33,7 +38,7 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h5 class="card-title">About</h5>
-                <p class="card-text">Learn more about green energy</p>
+                <p class="card-text">Learn more about what we do at Agri-Energy</p>
                 <a asp-controller="Home" asp-action="Privacy" class="btn btn-outline-success">Learn More</a>
             </div>
         </div>
