@@ -46,7 +46,6 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             return View(product);
         }
 
-        // Modified FarmerController with enhanced error tracking
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(Product product)
@@ -101,6 +100,15 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
             ViewBag.FarmerName = $"{farmer.FarmerName} {farmer.FarmerSurname}";
             return View(farmer.Products.OrderByDescending(p => p.ProductDate).ToList());
+        }
+
+        public async Task<IActionResult> Marketplace()
+        {
+            var products = await _context.Products
+                .Include(p => p.Farmer)
+                .ToListAsync();
+
+            return View(products);
         }
     }
 }
