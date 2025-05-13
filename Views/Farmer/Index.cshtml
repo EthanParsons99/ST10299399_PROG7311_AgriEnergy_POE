@@ -2,6 +2,12 @@
     ViewData["Title"] = "Farmer Dashboard";
 }
 
+<body style="background-image: url('/images/vyeboombg3.jpg');
+             background-size:cover;
+             background-repeat: no-repeat;
+             background-position: center;">
+</body>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +16,7 @@
                     <h2>Farmer Dashboard</h2>
                 </div>
                 <div class="card-body">
-                    <p>Welcome to the green energy dashboard</p>
+                    <p>Welcome to the Farmer Dashboard from here you are able to navigate to the function you would like to achieve</p>
 
 
 
@@ -37,6 +43,18 @@
                                     <a asp-action="AddProduct" class="btn btn-outline-success">Add new Product</a>
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Marketplace
+                                    </h5>
+                                    <p class="card-text">View all products you have added.</p>
+                                    <a asp-action="MarketPlace" class="btn btn-outline-success">Marketplace</a>
+                                </div>
                             </div>
                         </div>
                     </div>

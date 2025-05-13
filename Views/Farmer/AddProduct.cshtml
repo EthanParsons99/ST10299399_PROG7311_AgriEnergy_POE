@@ -4,7 +4,13 @@
     ViewData["Title"] = "Add Product";
 }
 
-<div class="container">
+<body style="background-image: url('/images/vyeboombg4.jpg');
+             background-size:cover;
+             background-repeat: no-repeat;
+             background-position: center;">
+</body>
+
+<div class="container white-text">
     <h2>Add New Product</h2>
     
     <form asp-action="AddProduct" method="post">
@@ -12,7 +18,7 @@
         <input type="hidden" asp-for="FarmerId" />
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 white-text">
                 <div class="form-group mb-3">
                     <label asp-for="ProductName" class="form-label">Product Name</label>
                     <input asp-for="ProductName" class="form-control" required />
@@ -48,7 +54,7 @@
         
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-success">Add Product</button>
-            <a asp-action="ViewMyProducts" asp-route-farmerId="@Model.FarmerId" class="btn btn-outline-secondary">Back to My Products</a>
+            <a asp-action="ViewMyProducts" asp-route-farmerId="@Model.FarmerId" class="btn btn-secondary">Back to My Products</a>
         </div>
     </form>
 </div>
