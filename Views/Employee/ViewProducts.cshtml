@@ -3,6 +3,12 @@
     ViewData["Title"] = "View Products";
 }
 
+<body style="background-image: url('/images/vyeboombg3.jpg');
+             background-size:cover;
+             background-repeat: no-repeat;
+             background-position: center;">
+</body>
+
 <div class="container">
     <h2>Products</h2>
 
@@ -51,7 +57,7 @@
         <div class="row mt-5">
             @foreach (var product in Model)
             {
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
                             <h5 class="card-title">@product.ProductName</h5>

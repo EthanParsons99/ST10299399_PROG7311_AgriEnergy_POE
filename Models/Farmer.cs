@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Text.Json.Serialization;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
@@ -17,7 +18,8 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
         public string FarmerEmail { get; set; }
         public string FarmerPassword { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+    
+        public ICollection<Product>? Products { get; set; }
 
     }
 }
