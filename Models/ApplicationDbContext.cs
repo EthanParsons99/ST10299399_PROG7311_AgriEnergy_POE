@@ -10,21 +10,22 @@ using ST10299399_PROG7311_GreenEnergy_POE.Models;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
+    // DB Context class for the application
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Farmer> Farmers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Employee> Employees { get; set; }
-
         public string DbPath { get; private set; }
 
+        //A constructor that takes a DbContextOptions object and passes it to the base class
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-
-
+         //-----------------------------------------=========------------------------------------//
+         //A method that is called when the model is being created
+         //It is used to configure the model and seed data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -34,6 +35,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
                 .WithOne(p => p.Farmer)
                 .HasForeignKey(p => p.FarmerId);
 
+            //Seeding Employee data
             modelBuilder.Entity<Employee>().HasData(
                 new Employee
                 {
@@ -72,7 +74,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
                 }
 
             );
-
+            //Seeding Farmer data
             modelBuilder.Entity<Farmer>().HasData(
                 new Farmer
                 {
