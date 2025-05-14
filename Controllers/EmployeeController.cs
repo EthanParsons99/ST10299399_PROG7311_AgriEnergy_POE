@@ -13,7 +13,9 @@ using System;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
+    // Check if the user is authorized as an Employee
     [Authorize(Roles = "Employee")]
+    // This class handles the Employee-related actions
     public class EmployeeController : Controller
     {
 
@@ -23,17 +25,25 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         {
             _context = context;
         }
-
+         //-----------------------------------------=========------------------------------------//
+         // This action method is for the Employee's main page
+         // It returns the view for the Employee dashboard
         public IActionResult Index()
         {
             return View();
         }
-
+         //-----------------------------------------=========------------------------------------//
+         // This action method is for adding a new Farmer
+         // It returns the view for adding a Farmer
         public IActionResult AddFarmer()
         {
             return View();
         }
-
+         //-----------------------------------------=========------------------------------------//
+         // This action method handles the POST request for adding a new Farmer
+         // It takes a Farmer object as a parameter
+         // If the model state is valid, it adds the Farmer to the database
+         // If there is an error, it adds the error to the model state
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFarmer(Farmer farmer)
@@ -54,7 +64,9 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             }
             return View(farmer);
         }
-
+         //-----------------------------------------=========------------------------------------//
+         // This action method is for viewing all the Farmers Products
+         // It returns a view with a list of Farmers Products
         public async Task<IActionResult> ViewProducts(string searchCategory = null,
             DateTime? startDate = null, DateTime? endDate = null)
         {
@@ -90,6 +102,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
             return View(products);
         }
+        //-----------------------------------------=========------------------------------------//
     }
 }
  //-----------================End of file=================--------------//
