@@ -48,7 +48,7 @@ Once you have it running you can use the wb application as it has a very simple 
 - Username: Admin1
 - Password: admin1
 - Email: admin1@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Admin2
 - Password: admin2
 - Email: admin2@gmail.com
