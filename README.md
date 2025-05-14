@@ -52,40 +52,40 @@ Once you have it running you can use the wb application as it has a very simple 
 - Username: Admin2
 - Password: admin2
 - Email: admin2@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Admin3
 - Password: admin3
 - Email: admin3@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Admin4
 - Password: admin4
 - Email: admin4@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Admin5
 - Password: admin5
 - Email: admin5@gmail.com
-
+---------------------------------------------------------------------------
 ## Farmer Account
 - Username: Pieter
 - Password: pieter123
 - Email: pieter@gmail.com
-
+---------------------------------------------------------------------------
 - Username: John
 - Password: john123
 - Email: john@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Jasper
 - Password: jasper123
 - Email: jasper@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Manie
 - Password: manie123
 - Email: manie@gmail.com
-
+---------------------------------------------------------------------------
 - Username: Fanie
 - Password: fanie123
 - Email: fanie@gmail.com
-
+---------------------------------------------------------------------------
 ## Using the Application as Employee
 **1. Login**
    - After running the project navigate to the login
