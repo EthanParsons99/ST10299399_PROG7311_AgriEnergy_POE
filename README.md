@@ -29,7 +29,7 @@ This is the repository for the prototype of the Agri-Energy Connect web applicat
 
 ### Installation
 1. Clone the repository from Github
-   link paste
+   link paste https://github.com/EthanParsons99/ST10299399_PROG7311_AgriEnergy_POE.git 
 2. Open the solution file (.sln) in Visual Studio 2022
 3. The SQLite database file is within the project folder so no setup is required.
 4. Build the solution: Navigate to Build in the menu and select Build Solution
