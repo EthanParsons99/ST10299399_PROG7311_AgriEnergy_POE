@@ -13,6 +13,7 @@ using System;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
+    //Check if the user is logged in and has the role of Farmer
     [Authorize(Roles = "Farmer")]
     public class FarmerController : Controller
     {
@@ -22,33 +23,39 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         {
             _context = context;
         }
-
+         //-----------------------------------------=========------------------------------------//
+         //This action method is for the Farmer's main page
+         //It returns the view for the Farmer dashboard
         public IActionResult Index()
         {
+            //Check if the user is authenticated
             var farmerId = User.FindFirst("FarmerId")?.Value;
             if (farmerId == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
-
+            //Check if the user is logged in as a Farmer
             int id = int.Parse(farmerId);
-            var farmer = _context.Farmers
-                .Include(f => f.Products)
+            var farmer = _context.Farmers // Get the Farmer from the database
+                .Include(f => f.Products) // Include the Products related to the Farmer
                 .FirstOrDefault(f => f.FarmerId == id);
 
             return View(farmer);
             
         }
-
-
+         //-----------------------------------------=========------------------------------------//
+         //This action method is for adding a new Product
+         //It returns the view for adding a Product
         public IActionResult AddProduct()
         { 
+            //Check if the user is authenticated
             string currentFarmerId = User.FindFirst("FarmerId")?.Value;
+            //If the user is not authenticated, redirect to the login page
             if(string.IsNullOrEmpty(currentFarmerId))
             {
                return RedirectToAction("Login", "Auth"); 
             }
-
+            //If the user is authenticated, create a new Product object
             var product = new Product
             {
                 FarmerId = int.Parse(currentFarmerId),
@@ -57,7 +64,10 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
             return View(product);
         }
-
+         //-----------------------------------------=========------------------------------------//
+         //This action method handles the POST request for adding a new Product
+         //It takes a Product object as a parameter
+         //If the model state is valid, it adds the Product to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(Product product)
@@ -69,7 +79,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             {
                 product.FarmerId = int.Parse(currentFarmerId);
             }
-
+            //Remove the Farmer property from the model state to prevent validation errors
             ModelState.Remove("Farmer");
             if (ModelState.IsValid)
             {
@@ -92,7 +102,10 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             }
             return View(product);
         }
-
+         //-----------------------------------------=========------------------------------------//
+         //This action method is for viewing the Farmer's Products
+         //It takes a farmerId as a parameter
+         //It returns a view with a list of the Farmer's Products
         public async Task<IActionResult> ViewMyProducts(int farmerId)
         {
             var farmer = await _context.Farmers
@@ -113,7 +126,9 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
             ViewBag.FarmerName = $"{farmer.FarmerName} {farmer.FarmerSurname}";
             return View(farmer.Products.OrderByDescending(p => p.ProductDate).ToList());
         }
-
+         //-----------------------------------------=========------------------------------------//
+         //This action method is for viewing the Marketplace
+         //It returns a view with a list of all Products
         public async Task<IActionResult> Marketplace()
         {
             var products = await _context.Products
@@ -122,6 +137,7 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 
             return View(products);
         }
+         //-----------------------------------------=========------------------------------------//
     }
 }
  //-----------================End of file=================--------------//
