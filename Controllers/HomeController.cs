@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
 {
+    //Controller for the Home page
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,17 +18,19 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         {
             _logger = logger;
         }
-
+         //-----------------------------------------=========------------------------------------//
+         //Index page for the Home page
         public IActionResult Index()
         {
             return View();
         }
-
+         //-----------------------------------------=========------------------------------------/
+         // About page for the Home page
         public IActionResult Privacy()
         {
             return View();
         }
-
+         //-----------------------------------------=========------------------------------------//
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
