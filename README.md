@@ -58,6 +58,7 @@ Once you have it running you can use the wb application as it has a very simple 
    - After running the project navigate to the login
    - Enter the required Employee details given above
    - The system will redirect you to the Employee Dashboard
+   -
 **2. Managing Farmers**
    - On the dashboard you can navigate to the page to add new farmers page
    - Enter the required fields with the farmers details and click add farmer
