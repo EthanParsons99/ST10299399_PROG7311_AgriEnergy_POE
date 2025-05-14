@@ -58,14 +58,16 @@ Once you have it running you can use the wb application as it has a very simple 
    - After running the project navigate to the login
    - Enter the required Employee details given above
    - The system will redirect you to the Employee Dashboard
-   -
+   
 **2. Managing Farmers**
    - On the dashboard you can navigate to the page to add new farmers page
    - Enter the required fields with the farmers details and click add farmer
    - The farmers information will be saved to the database
+   
 **3. Viewing Products**
    - Using either the navigation bar at the to or going back to the dashboard you can go to the page to view added products
    - On the page you are able to see all products that have been added by farmers or filter the products
+   
 **4. Logout**
    - There is also a logout option on the right hand side of the navigation bar
      
@@ -74,15 +76,19 @@ Once you have it running you can use the wb application as it has a very simple 
    - After running the project navigate to the login
    - Enter the seeded farmer details given above or use the details you added as employee
    - You will then be redirected to the Farmer Dashboard
+   
 **2. Adding Products**
    - Navigate to the add products page
    - Enter all the required fields and click add product.
    - The product should then save to the database and display in the market place
+   
 **3. Viewing products**
    - From the dashboard click on My products
    - You will then see the products you have added
+   
 **4. Marketplace**
    - If you navigate to the marketplace you will be able to see all products from diffrent accounts.
+   
 **5. Logout**
    - There is also a logout option on the right hand side of the navigation bar
 
