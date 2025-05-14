@@ -135,7 +135,7 @@ Once you have it running you can use the wb application as it has a very simple 
 - Delete feature: Allwoing farmers to delete products they have added and employees to delete farmers they have added.
 
 ## Refrences
-Role Based Authorization: https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-9.0
-                          https://www.c-sharpcorner.com/article/role-based-authentication-in-asp-net-mvc/
-Pro C# 10 with .NET6 Foundational Principles and Practices in Programming 11th Edition Andrew Troelsen and Phil Japikse
-SQLite DB: IIE Programming 3A Module Manual 2025 (First Edition: 2018) and Lecturer Resources
+- Role Based Authorization: https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-9.0
+                            https://www.c-sharpcorner.com/article/role-based-authentication-in-asp-net-mvc/
+- Pro C# 10 with .NET6 Foundational Principles and Practices in Programming 11th Edition Andrew Troelsen and Phil Japikse
+- SQLite DB: IIE Programming 3A Module Manual 2025 (First Edition: 2018) and Lecturer Resources
