@@ -10,6 +10,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+// Product class representing a product in the system
+// It contains properties for ProductId, ProductName, ProductCategory, ProductPrice, ProductDate, and FarmerId
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
     public class Product
