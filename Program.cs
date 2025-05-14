@@ -75,11 +75,11 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
                 {
                     context.Farmers.Add(new Farmer
                     {
-                        FarmerName = "John",
-                        FarmerSurname = "Doe",
+                        FarmerName = "Pieter",
+                        FarmerSurname = "Visser",
                         FarmerPhone = "1234567890",
-                        FarmerEmail = "1234567890",
-                        FarmerPassword = "password123"
+                        FarmerEmail = "pieter@gmail.com",
+                        FarmerPassword = "pieter123"
                     });
                     context.SaveChanges();
                 }
