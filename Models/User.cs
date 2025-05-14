@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/// <summary>
+/// Ethan Parsons
+/// ST10299399
+/// PROG7311
+/// </summary>
+using Microsoft.AspNetCore.Mvc;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
@@ -11,3 +16,4 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
         public string Role { get; set; } // "Farmer" or "Employee"
     }
 }
+ //-----------================End of file=================--------------//

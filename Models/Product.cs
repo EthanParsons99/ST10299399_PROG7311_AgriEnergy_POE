@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/// <summary>
+/// Ethan Parsons
+/// ST10299399
+/// PROG7311
+/// </summary>
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,3 +27,4 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Models
         public Farmer Farmer { get; set; }
     }
 }
+ //-----------================End of file=================--------------//

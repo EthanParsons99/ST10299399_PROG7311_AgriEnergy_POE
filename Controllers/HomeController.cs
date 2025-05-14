@@ -1,3 +1,8 @@
+/// <summary>
+/// Ethan Parsons
+/// ST10299399
+/// PROG7311
+/// </summary>
 using Microsoft.AspNetCore.Mvc;
 using ST10299399_PROG7311_GreenEnergy_POE.Models;
 using System.Diagnostics;
@@ -36,3 +41,4 @@ namespace ST10299399_PROG7311_GreenEnergy_POE.Controllers
         }
     }
 }
+ //-----------================End of file=================--------------//

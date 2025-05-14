@@ -1,3 +1,8 @@
+/// <summary>
+/// Ethan Parsons
+/// ST10299399
+/// PROG7311
+/// </summary>
 using ST10299399_PROG7311_GreenEnergy_POE.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -91,3 +96,4 @@ namespace ST10299399_PROG7311_GreenEnergy_POE
         }
     }
 }
+ //-----------================End of file=================--------------//
