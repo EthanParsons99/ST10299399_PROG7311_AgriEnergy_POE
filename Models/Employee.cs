@@ -11,6 +11,8 @@ using System;
 
 namespace ST10299399_PROG7311_GreenEnergy_POE.Models
 {
+    // Employee class representing an employee in the system
+    // It contains properties for EmployeeId, EmployeeName, EmployeePassword, and EmployeeEmail
     public class Employee
     {
         public int EmployeeId { get; set; }
